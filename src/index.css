@@ -12,6 +12,10 @@ section {
   padding: 1rem 7rem;
 }
 
+.container {
+  min-height: 100vh;
+}
+
 /* ------------------ */
 /* -----NAVBAR------- */
 /* ------------------ */
