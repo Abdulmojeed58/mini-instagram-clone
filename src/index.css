@@ -6,6 +6,7 @@
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgb(250, 250, 250);
 }
 
 section {
@@ -26,6 +27,7 @@ nav {
   justify-content: space-around;
   padding: 1rem 0;
   border-bottom: 1px solid rgb(219, 219, 219);
+  background-color: white;
 }
 
 nav .search {
@@ -75,6 +77,7 @@ nav .nav-icon {
   gap: 5rem;
   padding: 1.5rem 0;
   padding-left: 5rem;
+  
 }
 
 .bio .bio-image input {
@@ -179,7 +182,7 @@ nav .nav-icon {
 
 .gallery img {
   width: calc(33vw - 7rem);
-  
+  height: 100%;
 }
 
 .gallery .photos {
@@ -239,6 +242,40 @@ nav .nav-icon {
   cursor: pointer;
 }
 
+.gallery .image-container {
+  max-height: 25vw;
+  overflow: hidden;
+}
+
+.gallery .camera {
+  width: 70px;
+  height: 70px;
+  border: 3px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.gallery .camera i {
+  font-size: 1.7rem;
+}
+
+.gallery .no-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.3rem;
+  margin-top: 3rem;
+}
+
+.gallery .no-post h2 {
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+
 
 
 
@@ -256,6 +293,7 @@ nav .nav-icon {
   .gallery img {
     width: calc(33vw - 2rem);
   }
+
 
   .gallery .photos {
     row-gap: 1rem;
@@ -285,9 +323,12 @@ nav .nav-icon {
     font-size: 1.3rem;
   }
 
+
+
   .bio {
     padding-inline: 0;
     gap: 1rem;
+    padding-top: .5rem;
   }
 
   .bio label {
@@ -299,18 +340,24 @@ nav .nav-icon {
     margin: .5rem 0;
   }
 
+  
 
   .gallery {
     margin-inline: 0;
   }
 
   .gallery .photos {
-    gap: 5px;
+    row-gap: 2px;
   }
 
   .gallery img {
-    width: calc(33vw - 8px);
+    width: calc(32vw - 2px);
   }
+
+  .gallery .image-container {
+    max-height: 33vw;
+  }
+
 }
 
 

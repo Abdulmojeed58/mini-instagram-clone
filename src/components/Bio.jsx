@@ -13,8 +13,8 @@ export default function Bio() {
     const [profilePhoto, setProfilePhoto] = React.useState(image)
 
     const [profile, setProfile] = React.useState({
-        name: 'Ayolax',
-        title: 'Frontend Developer (ReactJs)'
+        name: 'Username',
+        title: 'Bio'
     })
 
     function saveProfile(e) {
@@ -35,6 +35,7 @@ export default function Bio() {
     const form = (
         <form onSubmit={(e)=>e.preventDefault()}>
             <input type='text' name='name' value={input.name} onChange={(e)=>saveProfile(e)}/>
+            
             <input type='text' name='title' value={input.title} onChange={(e)=>saveProfile(e)} />
 
             <button 
