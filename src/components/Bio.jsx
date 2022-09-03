@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import image from '../image/instagram-img.svg'
 import getPhotoUrl from "get-photo-url";
-import { useLiveQuery } from "dexie-react-hooks";
+// import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../dexie";
 
 export default function Bio() {
