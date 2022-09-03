@@ -1,28 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import getPhotoUrl from "get-photo-url";
+import { db } from "../dexie";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export default function Gallery() {
 
-    const [picture, setPicture] = React.useState([])
+    const picture = useLiveQuery(()=>db.gallery.toArray(), [])
+
 
     async function addPost() {
-        const newUrl = await getPhotoUrl('#add-btn')
-        const newPost = {id:Date.now(), url:newUrl}
 
-        setPicture(prevPicture=>(
-            [
-                newPost,
-                ...prevPicture
-            ]
-        ))
+        db.gallery.add({
+            url: await getPhotoUrl('#add-btn')
+        })
+    }
+
+    const removePost = (id)=>{
+        db.gallery.delete(id)
     }
 
 
-    const posts = picture.map((post)=>(
+    const posts = picture?.map((post)=>(
         <div key={post.id} className="image-container">
             <img src={post.url} alt='majy' />
             <div>
-                <button>Delete</button>
+                <button onClick={()=>removePost(post.id)}>Delete</button>
             </div>
         </div>
     ))
@@ -46,8 +48,8 @@ export default function Gallery() {
                     <h3>POSTS</h3>
                 </div>
             </div>
-
-            { picture.length ? 
+            
+            { picture?.length ? 
                 <div className="photos">
                     {posts} 
                 </div> :

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import image from '../image/instagram-img.svg'
 import getPhotoUrl from "get-photo-url";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "../dexie";
 
 export default function Bio() {
 
@@ -17,6 +19,19 @@ export default function Bio() {
         title: 'Bio'
     })
 
+
+    // //////////////////////////////
+    useEffect(()=>{
+        const setData = async ()=>{
+            const getData = await db.bio.get('info')
+            const profilePhoto = await db.bio.get('profilePhoto')
+            getData && setProfile(getData)
+            profilePhoto && setProfilePhoto(profilePhoto)
+        }
+        setData()
+    }, [])
+    // console.log(db)
+
     function saveProfile(e) {
         setInput(prevInput=>(
             {
@@ -25,16 +40,29 @@ export default function Bio() {
             }
         ))
     }
+    
+    async function saveInfo() {
+        setEdit(false)
+        setProfile({name:input.name, title:input.title})
+        
+
+        ///////////////////////////
+        await db.bio.put({name:input.name, title:input.title}, 'info')
+        // await db.bio.put({name:input.name, title:input.title}, 'info')
+
+    }
+
 
     async function updatePhotoUrl() {
         const newProfilePhoto = await getPhotoUrl('#bioImage')
         setProfilePhoto(newProfilePhoto)
-        // console.log(setProfilePhoto)
+
+        await db.bio.put(newProfilePhoto, 'profilePhoto')
     }
 
     const form = (
         <form onSubmit={(e)=>e.preventDefault()}>
-            <input type='text' name='name' value={input.name} onChange={(e)=>saveProfile(e)}/>
+            <input type='text' name='name' value={input.name} onChange={(e)=>saveProfile(e)}  defaultValue='Username'/>
             
             <input type='text' name='title' value={input.title} onChange={(e)=>saveProfile(e)} />
 
@@ -47,10 +75,7 @@ export default function Bio() {
 
             <button type="submit" 
                 className="save" 
-                onClick={()=>{
-                    setEdit(false)
-                    setProfile({name:input.name, title:input.title})
-                }}
+                onClick={saveInfo}
             >
                 Save
             </button>
