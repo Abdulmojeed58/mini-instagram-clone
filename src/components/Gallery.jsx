@@ -19,6 +19,9 @@ export default function Gallery() {
         db.gallery.delete(id)
     }
 
+    const removeAll = ()=> db.gallery.clear()
+
+
 
     const posts = picture?.map((post)=>(
         <div key={post.id} className="image-container">
@@ -56,7 +59,9 @@ export default function Gallery() {
                 noPost
             }
 
+
             <div className="add-btn">
+                {picture?.length ? <button className="remove-all" onClick={removeAll}>Delete All Posts</button> : ''}
                 <input type='file' accept="image/*" id='add-btn' />
                 <label htmlFor="add-btn" onClick={addPost}>
                     <i className="fa-solid fa-square-plus"></i>
