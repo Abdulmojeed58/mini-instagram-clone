@@ -15,7 +15,7 @@ function App() {
       <Gallery />
 
       <footer>
-        © {new Date().getFullYear()} Instagram <a href='https://github.com/Abdulmojeed58' target='_blank'>Ayoola Abdulmojeed</a>
+        © {new Date().getFullYear()} Instagram <a href='https://github.com/Abdulmojeed58'>Ayoola Abdulmojeed</a>
       </footer>
     </div>
   );
